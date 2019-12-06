@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="example-container mat-elevation-z8">
+        <table mat-table #table matSort [dataSource]="dataSource">
+            
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef>Edit</th>
+                <td mat-cell *matCellDef="let element">
+                    <a mat-icon-button color="primary" [routerLink]="['/organizations',element._id,'detail']">
+                        <mat-icon class="mat-18">edit</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="editMembers">
+                <th mat-header-cell *matHeaderCellDef>Edit Members</th>
+                <td mat-cell *matCellDef="let element">
+                    <a mat-icon-button color="primary" [routerLink]="['/roles','org',element._id]">
+                        <mat-icon class="mat-18">account_box</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="editProjects">
+                <th mat-header-cell *matHeaderCellDef>Edit Projects</th>
+                <td mat-cell *matCellDef="let element">
+                    <a mat-icon-button color="primary" [routerLink]="['/projects','org',element._id]">
+                        <mat-icon class="mat-18">widgets</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="locked">
+                <th mat-header-cell *matHeaderCellDef>locked</th>
+                <td mat-cell *matCellDef="let element">{{element.locked}} </td>
+            </ng-container>
+            <ng-container matColumnDef="shortname">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>shortname</th>
+                <td mat-cell *matCellDef="let element">{{element.shortname}}</td>
+            </ng-container>
+            <ng-container matColumnDef="fullname">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>fullname</th>
+                <td mat-cell *matCellDef="let element">{{element.fullname}}</td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>email</th>
+                <td mat-cell *matCellDef="let element">{{element.email}}</td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef>description</th>
+                <td mat-cell *matCellDef="let element">{{element.description}}</td>
+            </ng-container>
+            <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>address</th>
+                <td mat-cell *matCellDef="let element">{{element.address}}</td>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef>phone</th>
+                <td mat-cell *matCellDef="let element">{{element.phone}}</td>
+            </ng-container>
+            <ng-container matColumnDef="country">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>country</th>
+                <td mat-cell *matCellDef="let element">{{element.country}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+</div>
+</div>

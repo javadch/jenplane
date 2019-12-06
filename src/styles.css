@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body { margin: 0; padding: 0; }
+
+.nav-link {
+  cursor: pointer;
+}
+nav{
+  margin-bottom: 40px;
+  padding: 0 !important;
+}
+.nav-item {
+  padding: 10px 0;
+}
+.nav-item.active{
+  background: lightblue;
+}
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active{
+  color: #464b52;
+}
+mat-toolbar{
+  margin-bottom: 20px !important;
+}
+h4.head{
+  margin-bottom: 40px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+mat-raised-button{
+  margin-right: 10px !important;
+}
+.mat-button-wrapper a {
+  color: #fff;
+}
+.query-info{
+  padding: 20px 0 40px 0;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-full-width:nth-last-child() {
+  margin-bottom: 10px;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+  overflow: auto;
+}
+th.mat-header-cell{
+  text-transform: capitalize;
+}
+th.mat-header-cell * {
+  text-transform: capitalize;
+}
+
+
+.isbn-col {
+  flex: 0 0 100px !important;
+  white-space: unset !important;
+}
+
+.button-row {
+  margin: 10px 0;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+mat-header-cell{
+  text-transform: capitalize;
+}
+mat-radio-group{
+  display: block;
+}
+mat-radio-group mat-radio-button{
+  margin: 0 15px 10px 0;
+}
+form > mat-checkbox{
+  margin: 30px 0 20px 0;
+  display: block;
+}
+
+.alertsContainer .alertsRow{
+  position: fixed !important;
+  z-index: 99999;
+  right: 0 !important;
+  top: 10px !important;
+  z-index: 9999999999 !important;
+  background: white !important;
+}
+
+.alertsContainer .alertsRow .messagecontainer{
+  height: 50px !important;
+  padding: 10px 20px !important;
+}

@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="button-row">
+        <a mat-raised-button color="primary" [routerLink]="['/admin']"><mat-icon>list</mat-icon></a>
+    </div>
+    <form [formGroup]="thisForm" (ngSubmit)="onFormSubmit(thisForm.value)">
+
+        <mat-checkbox formControlName="locked">Lock organization?</mat-checkbox>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Shortname" formControlName="shortname" [errorStateMatcher]="matcher">
+            <mat-error>
+                <span *ngIf="f.shortname.touched && f.shortname.errors?.required">Required</span>
+                <span *ngIf="f.shortname.touched && f.shortname.errors?.maxlength">Maximum of 20 characters</span>
+                <span *ngIf="f.shortname.touched && f.shortname.errors?.pattern">Only alphanumeric characters without spaces are allowed</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="fullname" formControlName="fullname" [errorStateMatcher]="matcher">
+            <mat-error>
+                <span *ngIf="f.fullname.touched && f.fullname.errors?.required">Required</span>
+                <span *ngIf="f.fullname.touched && f.fullname.errors?.maxlength">Maximum of 256 characters</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width">
+            <input matInput type="email" placeholder="email" formControlName="email" [errorStateMatcher]="matcher">
+            <mat-error>
+                <span *ngIf="f.email.touched && f.email.errors?.required">Required</span>
+                <span *ngIf="f.email.touched && f.email.errors?.email">Invalid email</span>
+                <span *ngIf="f.email.touched && f.email.errors?.maxlength">Maximum of 256 characters</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Description" formControlName="description" [errorStateMatcher]="matcher"></textarea>
+            <mat-error>
+                <span *ngIf="f.description.touched && f.description.errors?.maxlength">Maximum of 500 characters</span>
+            </mat-error>
+        </mat-form-field>
+
+        <!-- <label>Logo</label>
+        <br>
+        <input id="logo" name="logo" type="file" (change)="fileChangeEvent($event)" placeholder="Upload a file..." /> -->
+        
+        <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Address" formControlName="address" [errorStateMatcher]="matcher"></textarea>
+            <mat-error>
+                <span *ngIf="f.address.touched && f.address.errors?.maxlength">Maximum of 500 characters</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width">
+            <input matInput type="tel" placeholder="Phone" formControlName="phone" [errorStateMatcher]="matcher">
+            <mat-error>
+                <span *ngIf="f.phone.touched && f.phone.errors?.maxlength">Maximum of 50 characters</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="country" formControlName="country" [errorStateMatcher]="matcher">
+            <mat-error>
+                <span *ngIf="f.country.touched && f.country.errors?.maxlength">Maximum of 50 characters</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <div class="button-row">
+            <button type="submit" [disabled]="!thisForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+        </div>
+    </form>
+</div>

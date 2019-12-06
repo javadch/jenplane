@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <form [formGroup]="thisForm" (ngSubmit)="onFormSubmit(thisForm.value)">
+                
+                <mat-toolbar>
+                    <span>{{orgData?.fullname}} > Create Project</span>
+                </mat-toolbar>
+
+                <div class="button-row">
+                    <a mat-raised-button color="primary" [routerLink]="['/projects', 'org', orgId]"><mat-icon>list</mat-icon></a>
+                </div>
+
+                <div class="button-row">
+                    <button type="submit" [disabled]="!thisForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+                </div>
+                
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="shortname" formControlName="shortname" [errorStateMatcher]="matcher">
+                    <mat-error>
+                        <div *ngIf="f.shortname.errors" class="invalid-feedback">
+                            <div *ngIf="f.shortname.errors.required">Required</div>
+                            <div *ngIf="f.shortname.errors.maxlength">Maximum 20 characters</div>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="fullname" formControlName="fullname" [errorStateMatcher]="matcher">
+                    <mat-error>
+                        <div *ngIf="f.fullname.errors" class="invalid-feedback">
+                            <div *ngIf="f.fullname.errors.required">Required</div>
+                            <div *ngIf="f.fullname.errors.maxlength">Maximum 256 characters</div>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="Description" formControlName="description" [errorStateMatcher]="matcher">
+                    </textarea>
+                    <mat-error>
+                        <div *ngIf="f.description.errors" class="invalid-feedback">
+                            <div *ngIf="f.description.errors.maxlength">Maximum 500 characters</div>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="button-row">
+                    <button type="submit" [disabled]="!thisForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

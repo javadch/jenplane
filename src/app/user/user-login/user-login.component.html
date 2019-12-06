@@ -1,0 +1,26 @@
+<div class="container">
+    <form class="form-signin" [formGroup]="thisForm" (ngSubmit)="onFormSubmit(thisForm.value)">
+        <mat-form-field>
+            <input matInput placeholder="Enter your email" formControlName="email" [errorStateMatcher]="matcher" required>
+            <mat-error>
+                <span *ngIf="!thisForm.get('email').valid && thisForm.get('email').touched">Required</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <input matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error>
+                <span *ngIf="!thisForm.get('password').valid && thisForm.get('password').touched">Required</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <div class="button-row">
+            <button type="submit" [disabled]="!thisForm.valid" mat-raised-button color="primary">Login</button>
+        </div>
+        
+		<p>Not a member? <a [routerLink]="['/user/register']">Register here</a></p>
+    </form>
+</div>

@@ -1,0 +1,28 @@
+<div class="container">
+	<form [formGroup]="thisForm" (ngSubmit)="onFormSubmit(thisForm.value)">
+
+		<mat-form-field class="example-full-width">
+			<input matInput placeholder="firstname" formControlName="firstname" [errorStateMatcher]="matcher">
+			<mat-error>
+				<span *ngIf="f.firstname.touched && f.firstname.errors?.required">Required</span>
+				<span *ngIf="f.firstname.touched && f.firstname.errors?.maxlength">Maximum of 50 characters</span>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="example-full-width">
+			<input matInput placeholder="lastname" formControlName="lastname" [errorStateMatcher]="matcher">
+			<mat-error>
+				<span *ngIf="f.lastname.touched && f.lastname.errors?.required">Required</span>
+				<span *ngIf="f.lastname.touched && f.lastname.errors?.maxlength">Maximum of 50 characters</span>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="example-full-width">
+			<input matInput type="email" placeholder="Password" formControlName="password">
+		</mat-form-field>
+
+		<div class="button-row">
+			<button type="submit" [disabled]="!thisForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+		</div>
+	</form>
+</div>

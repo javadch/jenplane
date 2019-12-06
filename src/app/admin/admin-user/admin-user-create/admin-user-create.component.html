@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="button-row">
+        <a mat-raised-button color="primary" [routerLink]="['/users']"><mat-icon>list</mat-icon></a>
+    </div>
+    <form [formGroup]="thisForm" (ngSubmit)="onFormSubmit(thisForm.value)">
+    
+        <div class="button-row">
+            <button type="submit" [disabled]="!thisForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+        </div>
+        
+        <mat-checkbox formControlName="blocked">Block user?</mat-checkbox>
+        <mat-checkbox formControlName="approved">Approve user?</mat-checkbox>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Firstname" formControlName="firstname" [errorStateMatcher]="matcher">
+            <mat-error>
+                <span *ngIf="f.firstname.touched && f.firstname.errors?.required">Required</span>
+                <span *ngIf="f.firstname.touched && f.firstname.errors?.maxlength">Maximum of 50 characters</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Lastname" formControlName="lastname" [errorStateMatcher]="matcher">
+            <mat-error>
+                <span *ngIf="f.lastname.touched && f.lastname.errors?.required">Required</span>
+                <span *ngIf="f.lastname.touched && f.lastname.errors?.maxlength">Maximum of 50 characters</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width">
+            <input matInput type="email" placeholder="Email" formControlName="email" [errorStateMatcher]="matcher">
+            <mat-error>
+                <span *ngIf="f.email.touched && f.email.errors?.required">Required</span>
+                <span *ngIf="f.email.touched && f.email.errors?.email">Invalid email</span>
+                <span *ngIf="f.email.touched && f.email.errors?.maxlength">Maximum of 256 characters</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" formControlName="password" [errorStateMatcher]="matcher">
+            <mat-error>
+                <span *ngIf="f.password.touched && f.password.errors?.required">Required</span>
+                <span *ngIf="f.password.touched && f.password.errors?.minlength">Minimum 6 characters</span>
+            </mat-error>
+        </mat-form-field>
+        
+        <div class="button-row">
+            <button type="submit" [disabled]="!thisForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+        </div>
+    </form>
+</div>
