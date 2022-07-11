@@ -1,0 +1,65 @@
+@prefix : 		    <http://jenplane.org/> .
+@prefix rdf: 		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: 	    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: 		<http://www.w3.org/2002/07/owl#> .
+@prefix xsd: 		<http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: 		<http://purl.org/dc/elements/1.1/> .
+@prefix xml: 		<http://www.w3.org/XML/1998/namespace> .
+@prefix foaf: 	    <http://xmlns.com/foaf/0.1/> .
+@prefix skos:       <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcat:       <http://www.w3.org/ns/dcat#> .
+@prefix dcterms:	<http://purl.org/dc/terms/> .
+@base 			    <http://jenplane.org/> .
+
+<http://jenplance.org/> rdf:type owl:Ontology ;
+    dc:title "Jenplane Ontology"@en;
+    dc:description "The ontology to model Jenplane; a governance process for the management of data intesive projects."@en ;
+    vann:preferredNamespaceUri "http://jenplance.org/" ;
+    vann:preferredNamespacePrefix "jp"@en ;
+    bibo:status "Draft"@en ;
+    schema:schemaVersion "1.0.0" ;
+    dc:creator "Javad Chamanara" ;
+    dcterms:contributor <https://orcid.org/0000-0001-6390-1584> ;
+    dcterms:license "MIT License"@en ;
+    rdfs:seeAlso <https://databri-x.eu> .
+
+:Process rdf:type owl:Class; 
+    rdfs:comment "process."@en ;
+    rdfs:label "Process"@IRI-based; 
+    rdfs:label "Process"@en ;
+    :version schema:schemaVersion ;
+    :phases rdf:Seq ;
+    :discplines rdf:Seq .   
+
+# apply a contraint to restrict the phases to the avlids ones only
+:Phase rdf:type owl:Class; 
+    rdfs:comment "phase..."@en ;
+    rdfs:label "Phase"@IRI-based; 
+    rdfs:label "Phase"@en .    
+
+# apply a contraint to restrict the disciplines to the avlids ones only
+:Discipline rdf:type owl:Class; 
+    rdfs:comment "discipline..."@en ;
+    rdfs:label "Discipline"@IRI-based; 
+    rdfs:label "Discipline"@en .    
+
+:Actvity rdf:type owl:Class; 
+    rdfs:comment "activity..."@en ;
+    rdfs:label "Activity"@IRI-based; 
+    rdfs:label "Activity"@en .
+
+:phases rdf:type owl:ObjectProperty ;
+    rdfs:domain :Process;
+    rdfs:range rdf:Seq .   
+
+:disciplines rdf:type owl:ObjectProperty ;
+    rdfs:domain :Process;
+    rdfs:range rdf:Seq .
+
+:hasPhase rdf:type owl:ObjectProperty ;
+    rdfs:domain :Activity;
+    rdfs:range  :Phase .
+
+:hasDiscipline rdf:type owl:ObjectProperty ;
+    rdfs:domain :Activity;
+    rdfs:range  :Discipline .
