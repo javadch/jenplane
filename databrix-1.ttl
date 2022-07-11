@@ -77,3 +77,10 @@
     jpn:prefferedColor "red" ;
     jpn:duration "18"^^xsd:integer ;
     jpn:effort "8"^^xsd:integer .
+
+:act_publish_data_on_repo a jpn:Activity ;
+    jpn:hasPhase :publishing, :preservation ;
+    jpn:hasDiscipline :describe, :preserve ;
+    jpn:prefferedColor "amber" ;
+    jpn:duration "12"^^xsd:integer ;
+    jpn:effort "8"^^xsd:integer .    
