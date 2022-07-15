@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  jenplane:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: jenplane-api
+    image: jenplane-api
+    restart: unless-stopped
+    env_file:
+      - ../backend/.env
+    volumes:
+      - appdata:/var/www
+    ports:
+      - "5000:80"
+    depends_on:
+      - mongodb
+    networks:
+      - frontend
+      - backend
+  mongodb:
+    image: mongo:5.0
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodbdata:/data/db
+    env_file:
+      - ../backend/.env
+    networks:
+      - backend
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+volumes:
+  mongodbdata:
+    driver: local
+  appdata:
+    driver: local
