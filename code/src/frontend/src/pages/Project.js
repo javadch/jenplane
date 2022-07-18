@@ -12,7 +12,10 @@ import { useEffect } from "react";
 import capitalize from "capitalize";
 import { RDF } from "data/rdf";
 import { useSelector } from "react-redux";
+import Button from "@mui/material/Button";
+import * as rdflib from "rdflib";
 import useProject from "components/hooks/useProject";
+import { sortedIndex } from "lodash";
 
 export default function Project(props) {
   const { id } = useParams();
@@ -20,12 +23,11 @@ export default function Project(props) {
   const projectData = useSelector((state) => state.project.data);
 
   // eslint-disable-next-line no-unused-vars
-  const { store } = useProject({ rdfContent: RDF, id });
+  const { store, saveProject } = useProject({ rdfContent: RDF, id });
 
   useEffect(() => {
     document.title = `${project.name}`;
   }, [project.name]);
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={8} lg={9}>
@@ -64,7 +66,7 @@ export default function Project(props) {
                                   l.cell_type === CELL_TYPES.ACTIVITY &&
                                   l.currentPhase === phase.id &&
                                   l.currentDiscipline === c.id &&
-                                  index === l.iteration
+                                  index === parseInt(l.iteration)
                               )
                               .map((a) => (
                                 <Activity
@@ -93,6 +95,9 @@ export default function Project(props) {
             </tr>
           </tbody>
         </JenPlane>
+        <Button sx={{ mt: 3 }} variant="contained" onClick={saveProject}>
+          Generate RDF
+        </Button>
       </Grid>
     </Grid>
   );

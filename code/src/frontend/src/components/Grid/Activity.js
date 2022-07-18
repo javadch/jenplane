@@ -94,7 +94,6 @@ const Activity = (props) => {
 
   const handlePreferredColorChange = (color, event) => {
     setEffort(color.hex);
-    console.log(color);
     dispatch(updatePreferredColor({ value: color.hex, id: props.data.id }));
   };
 
@@ -139,7 +138,7 @@ const Activity = (props) => {
             <br />
             <TextField
               size="small"
-              value={parseInt(duration)}
+              value={duration}
               onChange={handleDurationChange}
               variant="outlined"
               type={"number"}
@@ -149,7 +148,7 @@ const Activity = (props) => {
             <br />
             <TextField
               size="small"
-              value={parseInt(effort)}
+              value={effort}
               onChange={handleEffortChange}
               variant="outlined"
               type={"number"}

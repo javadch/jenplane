@@ -4,6 +4,10 @@ import { max } from "lodash";
 
 const initialState = {
   data: [],
+  metaData: {
+    disciplinesNodeId: "",
+    phasesNodeId: "",
+  },
 };
 
 export const projectSlice = createSlice({
@@ -12,6 +16,9 @@ export const projectSlice = createSlice({
   reducers: {
     setProject: (state, { payload }) => {
       state.data = payload;
+    },
+    setMetaData: (state, { payload }) => {
+      state.metaData = payload;
     },
     moveActivity: (state, { payload }) => {
       //Find index of specific object using findIndex method.
@@ -53,6 +60,7 @@ export const projectSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setProject,
+  setMetaData,
   moveActivity,
   updateDuration,
   updateEffort,
@@ -80,5 +88,9 @@ export const getLongestDuration = (data) => {
  * @return {Boolean} if this input field is Literal
  */
 export const getBiggestEffort = (data) => {
-  return max(data.map((c) => parseInt(c.effort)));
+  return max(
+    data
+      .filter((c) => c.cell_type === CELL_TYPES.ACTIVITY)
+      .map((c) => parseInt(c.effort))
+  );
 };
