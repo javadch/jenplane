@@ -100,7 +100,6 @@ function useProject({ rdfContent = RDF, id }) {
             NAME_SPACES.jenplaneNS("currentDiscipline"),
             null
           );
-          console.log(currentDiscipline?.[0]?.object.value);
           let currentPhase = store.match(
             a.subject,
             NAME_SPACES.jenplaneNS("currentPhase"),
@@ -164,7 +163,7 @@ function useProject({ rdfContent = RDF, id }) {
     projectData
       .filter((c) => c.cell_type === CELL_TYPES.DISCIPLINE)
       .map((c) => {
-        store.add(
+        return store.add(
           rdflib.sym(metaData.disciplinesNodeId),
           NAME_SPACES.rdfNS("li"),
           rdflib.sym(c.id)
@@ -224,7 +223,7 @@ function useProject({ rdfContent = RDF, id }) {
     projectData
       .filter((c) => c.cell_type === CELL_TYPES.ACTIVITY)
       .map((c) => {
-        updateActivityInStore(store, c);
+        return updateActivityInStore(store, c);
       });
     updateDisciplinesPhases(store);
     setStoreState(store);

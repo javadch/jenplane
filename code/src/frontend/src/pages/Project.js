@@ -13,9 +13,7 @@ import capitalize from "capitalize";
 import { RDF } from "data/rdf";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
-import * as rdflib from "rdflib";
 import useProject from "components/hooks/useProject";
-import { sortedIndex } from "lodash";
 
 export default function Project(props) {
   const { id } = useParams();
