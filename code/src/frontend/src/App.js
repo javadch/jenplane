@@ -16,6 +16,8 @@ import { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import { useLocation } from "react-router-dom";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const mdTheme = createTheme();
 
@@ -31,45 +33,47 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={mdTheme}>
-        {!noDashboard.includes(location.pathname) ? (
-          <Box sx={{ display: "flex" }}>
-            <CssBaseline />
-            <AppBar open={open} toggleDrawer={toggleDrawer} />
-            <Sidebar open={open} toggleDrawer={toggleDrawer} />
-            <Box
-              component="main"
-              sx={{
-                backgroundColor: (theme) =>
-                  theme.palette.mode === "light"
-                    ? theme.palette.grey[100]
-                    : theme.palette.grey[900],
-                flexGrow: 1,
-                height: "100vh",
-                overflow: "auto",
-              }}
-            >
-              <Toolbar />
-              <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route
-                    path="dashboard/organizations"
-                    element={<Organizations />}
-                  />
-                  <Route path="dashboard/users" element={<Users />} />
-                  <Route path="dashboard/processes" element={<Processes />} />
-                  <Route path="dashboard/projects" element={<Projects />} />
-                  <Route path="dashboard/project/:id" element={<Project />} />
-                </Routes>
-              </Container>
+        <DndProvider backend={HTML5Backend}>
+          {!noDashboard.includes(location.pathname) ? (
+            <Box sx={{ display: "flex" }}>
+              <CssBaseline />
+              <AppBar open={open} toggleDrawer={toggleDrawer} />
+              <Sidebar open={open} toggleDrawer={toggleDrawer} />
+              <Box
+                component="main"
+                sx={{
+                  backgroundColor: (theme) =>
+                    theme.palette.mode === "light"
+                      ? theme.palette.grey[100]
+                      : theme.palette.grey[900],
+                  flexGrow: 1,
+                  height: "100vh",
+                  overflow: "auto",
+                }}
+              >
+                <Toolbar />
+                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                  <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route
+                      path="dashboard/organizations"
+                      element={<Organizations />}
+                    />
+                    <Route path="dashboard/users" element={<Users />} />
+                    <Route path="dashboard/processes" element={<Processes />} />
+                    <Route path="dashboard/projects" element={<Projects />} />
+                    <Route path="dashboard/project/:id" element={<Project />} />
+                  </Routes>
+                </Container>
+              </Box>
             </Box>
-          </Box>
-        ) : (
-          <Routes>
-            <Route path="signin" element={<Signin />} />
-            <Route path="signup" element={<Signup />} />
-          </Routes>
-        )}
+          ) : (
+            <Routes>
+              <Route path="signin" element={<Signin />} />
+              <Route path="signup" element={<Signup />} />
+            </Routes>
+          )}
+        </DndProvider>
       </ThemeProvider>
     </div>
   );

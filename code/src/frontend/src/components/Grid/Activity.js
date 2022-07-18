@@ -6,16 +6,23 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { CELL_TYPES } from "data/projects";
 import { useDrag } from "react-dnd";
-import Slider from "@mui/material/Slider";
-import { useDispatch } from "react-redux";
-import { updateDuration, updateEffort } from "slices/projectSlice";
+import TextField from "@mui/material/TextField";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateDuration,
+  updateEffort,
+  updatePreferredColor,
+  getBiggestEffort,
+  getLongestDuration,
+} from "slices/projectSlice";
+import { BlockPicker } from "react-color";
 
 const BoxStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 500,
   bgcolor: "background.paper",
   border: "2px solid #d07f00",
   boxShadow: 24,
@@ -23,9 +30,7 @@ const BoxStyle = {
 };
 
 const StyledWrapper = styled.div`
-  height: 60px;
   position: relative;
-  display: block;
   overflow: hidden;
   margin: 0;
 `;
@@ -41,11 +46,22 @@ const StyledContainer = styled.div`
   justify-content: center;
 `;
 
+const MAX_HEIGHT = 70;
 const Activity = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [effort, setEffort] = useState(props.data?.effort);
   const [duration, setDuration] = useState(props.data?.duration);
+  const [preferredColor, setPreferredColor] = useState(
+    props.data?.preferredColor
+  );
+  const biggestEffort = useSelector((state) =>
+    getBiggestEffort(state.project.data)
+  );
+  const longestDuration = useSelector((state) =>
+    getLongestDuration(state.project.data)
+  );
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -60,19 +76,26 @@ const Activity = (props) => {
 
   const handleClose = () => setOpen(false);
 
-  const handleDurationChange = (event, newValue) => {
-    setDuration(newValue);
-    dispatch(updateDuration({ value: newValue, id: props.data.id }));
+  const handleDurationChange = (event) => {
+    setDuration(event.target.value);
+    dispatch(updateDuration({ value: event.target.value, id: props.data.id }));
   };
 
   useEffect(() => {
     setEffort(props.data?.effort);
     setDuration(props.data?.duration);
-  }, [props.data?.duration, props.data?.effort]);
+    setPreferredColor(props.data?.preferredColor);
+  }, [props.data?.duration, props.data?.effort, props.data?.preferredColor]);
 
-  const handleEffortChange = (event, newValue) => {
-    setEffort(newValue);
-    dispatch(updateEffort({ value: newValue, id: props.data.id }));
+  const handleEffortChange = (event) => {
+    setEffort(event.target.value);
+    dispatch(updateEffort({ value: event.target.value, id: props.data.id }));
+  };
+
+  const handlePreferredColorChange = (color, event) => {
+    setEffort(color.hex);
+    console.log(color);
+    dispatch(updatePreferredColor({ value: color.hex, id: props.data.id }));
   };
 
   return (
@@ -90,8 +113,11 @@ const Activity = (props) => {
           <StyledContainer
             style={{
               backgroundColor: props.data?.preferredColor,
-              height: (props.data?.effort * 100) / 8 + "%",
-              width: (props.data?.duration * 100) / 18 + "%",
+              height:
+                (((props.data?.effort * 100) / biggestEffort) * MAX_HEIGHT) /
+                  100 +
+                "px",
+              width: (props.data?.duration * 100) / longestDuration + "px",
             }}
             onClick={handleOpen}
           ></StyledContainer>
@@ -107,38 +133,44 @@ const Activity = (props) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {props.name}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 3 }}>
+          <div id="modal-modal-description" sx={{ mt: 3 }}>
             Details about the activity
             <br />
             <br />
-            Duration :{" "}
-            <Slider
+            <TextField
               size="small"
-              defaultValue={props.data?.duration}
-              aria-label="Small"
-              valueLabelDisplay="auto"
-              value={duration}
+              value={parseInt(duration)}
               onChange={handleDurationChange}
+              variant="outlined"
+              type={"number"}
+              label="Duration"
             />
             <br />
-            Effort:
-            <Slider
+            <br />
+            <TextField
               size="small"
-              defaultValue={props.data?.effort}
-              aria-label="Small"
-              valueLabelDisplay="auto"
-              value={effort}
+              value={parseInt(effort)}
               onChange={handleEffortChange}
+              variant="outlined"
+              type={"number"}
+              label="Effort"
             />
             <br />
-            Preferred color : {props.data?.preferredColor}
+            <br />
+            Preferred color :{" "}
+            <BlockPicker
+              value={preferredColor}
+              color={preferredColor}
+              onChange={handlePreferredColorChange}
+              triangle={"hide"}
+            />
             <br />
             Current Discipline : {props.data?.currentDiscipline}
             <br />
             Current Phase : {props.data?.currentPhase}
             <br />
             Iteration number : {props.data?.iteration}
-          </Typography>
+          </div>
         </Box>
       </Modal>
     </StyledWrapper>

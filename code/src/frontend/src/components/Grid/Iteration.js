@@ -5,12 +5,14 @@ import { useDrop } from "react-dnd";
 import styled from "@emotion/styled";
 
 const StyledIteration = styled.td`
+  background-color: #fff;
   > div {
     display: flex;
     flex-grow: 1;
     flex: 1;
     height: 100%;
     flex-direction: column-reverse;
+    width: 100px;
   }
 `;
 
@@ -22,7 +24,12 @@ const Iteration = (props) => {
       accept: CELL_TYPES.ACTIVITY,
       canDrop: (item) =>
         item.data.hasDiscipline.includes(props.discipline) &&
-        item.data.hasPhase.includes(props.phase),
+        item.data.hasPhase.includes(props.phase) &&
+        !(
+          item.data.currentDiscipline === props.discipline &&
+          item.data.currentPhase === props.phase &&
+          item.data.iteration === props.index
+        ),
       drop: (item) => {
         dispatch(
           moveActivity({
@@ -50,7 +57,7 @@ const Iteration = (props) => {
           ? `iteration`
           : " iteration milestone"
       }
-      style={{ position: "relative" }}
+      style={{ position: "relative", zIndex: 5 }}
     >
       <div>
         {props.children}
