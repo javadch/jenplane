@@ -3,7 +3,7 @@ version: "3.7"
 services:
   jenplane:
     build:
-      context: ./
+      context: ../backend/
       dockerfile: Dockerfile
     container_name: jenplane-api
     image: jenplane-api
@@ -31,6 +31,14 @@ services:
       - ../backend/.env
     networks:
       - backend
+  frontend:
+    container_name: jenplane-frontend
+    build:
+      context: ../frontend/
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:3000:80"
+
 networks:
   frontend:
     driver: bridge
