@@ -12,8 +12,7 @@ function useProject({ rdfContent = RDF, id }) {
   const metaData = useSelector((state) => state.project.metaData);
   var store = rdflib.graph();
   const [storeState, setStoreState] = useState(store);
-  //dispatch(setProject(rdfLayoutDATA));
-  //const [layout, setLayout] = useState(JSON.parse(JSON.stringify(rdfLayout)));
+
   useEffect(() => {
     const loadProject = async () => {
       try {
@@ -144,90 +143,114 @@ function useProject({ rdfContent = RDF, id }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const updateStatement = (s, aNode, predicate, value) => {
-    // update preferredColor
+  const updateStatementInStore = (s, aNode, predicate, value) => {
     let statement = s.match(aNode, predicate, undefined)?.[0];
     statement && s.removeStatement(statement);
     s.add(aNode, predicate, value);
   };
 
-  const updateDisciplinesPhases = (store) => {
-    // update preferredColor
-    let statements = store.match(
+  const deleteDisciplinesPhases = (s) => {
+    //disciplines
+    let dS = s.match(
       rdflib.sym(metaData.disciplinesNodeId),
       NAME_SPACES.rdfNS("li"),
       undefined
     );
-    statements?.length &&
-      statements.map((statement) => store.removeStatement(statement));
-    projectData
-      .filter((c) => c.cell_type === CELL_TYPES.DISCIPLINE)
-      .map((c) => {
-        return store.add(
-          rdflib.sym(metaData.disciplinesNodeId),
-          NAME_SPACES.rdfNS("li"),
-          rdflib.sym(c.id)
-        );
-      });
+    dS?.length && dS.map((statement) => s.removeStatement(statement));
+    //phases
+    let ps = s.match(
+      rdflib.sym(metaData.phasesNodeId),
+      NAME_SPACES.rdfNS("li"),
+      undefined
+    );
+    ps?.length && ps.map((statement) => s.removeStatement(statement));
   };
 
-  const updateActivityInStore = (store, activity) => {
+  const updateActivityInStore = (s, activity) => {
     let activityNode = rdflib.sym(activity.id);
     // update preferredColor
-    updateStatement(
-      store,
+    updateStatementInStore(
+      s,
       activityNode,
       NAME_SPACES.jenplaneNS("preferredColor"),
       activity.preferredColor
     );
     // update duration
-    updateStatement(
-      store,
+    updateStatementInStore(
+      s,
       activityNode,
       NAME_SPACES.jenplaneNS("duration"),
       activity.duration
     );
     // update effort
-    updateStatement(
-      store,
+    updateStatementInStore(
+      s,
       activityNode,
       NAME_SPACES.jenplaneNS("effort"),
       activity.effort
     );
     // update currentDiscipline
-    updateStatement(
-      store,
+    updateStatementInStore(
+      s,
       activityNode,
       NAME_SPACES.jenplaneNS("currentDiscipline"),
       rdflib.sym(activity.currentDiscipline)
     );
     // update currentPhase
-    updateStatement(
-      store,
+    updateStatementInStore(
+      s,
       activityNode,
       NAME_SPACES.jenplaneNS("currentPhase"),
       rdflib.sym(activity.currentPhase)
     );
     // update iteration
-    updateStatement(
-      store,
+    updateStatementInStore(
+      s,
       activityNode,
       NAME_SPACES.jenplaneNS("iteration"),
       activity.iteration
     );
-    return store;
+    return s;
   };
 
-  const saveProject = async () => {
+  const saveProject = () => {
     let store = storeState;
+    // update activities
     projectData
       .filter((c) => c.cell_type === CELL_TYPES.ACTIVITY)
       .map((c) => {
         return updateActivityInStore(store, c);
       });
-    updateDisciplinesPhases(store);
-    setStoreState(store);
-    console.log(store.serialize("text/turtle"));
+    /**
+     * Delete disciplines and phases statements
+     * this just a work around to keep the order of the disciplines and phases
+     * currently rdflib does not support rdf:Seq
+     */
+    deleteDisciplinesPhases(store);
+    // serialize the store
+    let serializedStore = store.serialize("text/turtle") + "\n";
+    // add disciplines and phases statements
+    projectData
+      .filter((c) => c.cell_type === CELL_TYPES.DISCIPLINE)
+      .map((c) => {
+        serializedStore =
+          serializedStore +
+          `${rdflib.sym(metaData.disciplinesNodeId)} ${NAME_SPACES.rdfNS(
+            "li"
+          )} ${rdflib.sym(c.id)} .\n`;
+        return null;
+      });
+    projectData
+      .filter((c) => c.cell_type === CELL_TYPES.PHASE)
+      .map((c) => {
+        serializedStore =
+          serializedStore +
+          `${rdflib.sym(metaData.phasesNodeId)} ${NAME_SPACES.rdfNS(
+            "li"
+          )} ${rdflib.sym(c.id)} .\n`;
+        return null;
+      });
+    console.log(serializedStore);
   };
 
   return { store: storeState, saveProject };
