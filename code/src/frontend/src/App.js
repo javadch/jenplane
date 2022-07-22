@@ -3,9 +3,9 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Organizations from "./pages/Organizations/Organizations";
 import NewOrganization from "./pages/Organizations/NewOrganization";
-import Processes from "./pages/Processes";
-import Projects from "./pages/Projects";
-import Project from "./pages/Project";
+import Processes from "./pages/Processes/Processes";
+import Projects from "./pages/Projects/Projects";
+import Project from "./pages/Projects/Project";
 import Users from "./pages/Users";
 import { Routes, Route } from "react-router-dom";
 import AppBar from "./components/Layout/AppBar";
@@ -21,6 +21,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NewProcess from "pages/Processes/NewProcess";
 
 const mdTheme = createTheme();
 
@@ -68,6 +69,10 @@ function App() {
                     />
                     <Route path="dashboard/users" element={<Users />} />
                     <Route path="dashboard/processes" element={<Processes />} />
+                    <Route
+                      path="dashboard/processes/add"
+                      element={<NewProcess />}
+                    />
                     <Route path="dashboard/projects" element={<Projects />} />
                     <Route path="dashboard/project/:id" element={<Project />} />
                   </Routes>
