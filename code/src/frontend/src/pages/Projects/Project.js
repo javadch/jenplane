@@ -58,11 +58,10 @@ export default function Project(props) {
                             return n.map((i, index) => (
                               <Iteration
                                 key={index}
-                                n={n}
-                                index={index}
                                 phase={phase.id}
                                 discipline={c.id}
                                 iteration={index}
+                                n={n}
                               >
                                 {projectData
                                   .filter(

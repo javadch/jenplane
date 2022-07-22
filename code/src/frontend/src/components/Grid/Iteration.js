@@ -28,7 +28,7 @@ const Iteration = (props) => {
         !(
           item.data.currentDiscipline === props.discipline &&
           item.data.currentPhase === props.phase &&
-          item.data.iteration === props.index
+          parseInt(item.data.iteration) === parseInt(props.iteration)
         ),
       drop: (item) => {
         dispatch(

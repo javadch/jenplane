@@ -10,8 +10,6 @@ services:
     restart: unless-stopped
     env_file:
       - ../backend/.env
-    volumes:
-      - appdata:/var/www
     ports:
       - "0.0.0.0:5000:80"
     depends_on:
@@ -46,6 +44,4 @@ networks:
     driver: bridge
 volumes:
   mongodbdata:
-    driver: local
-  appdata:
     driver: local
