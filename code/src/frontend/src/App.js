@@ -1,7 +1,8 @@
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import Organizations from "./pages/Organizations";
+import Organizations from "./pages/Organizations/Organizations";
+import NewOrganization from "./pages/Organizations/NewOrganization";
 import Processes from "./pages/Processes";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
@@ -18,6 +19,8 @@ import Container from "@mui/material/Container";
 import { useLocation } from "react-router-dom";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const mdTheme = createTheme();
 
@@ -59,6 +62,10 @@ function App() {
                       path="dashboard/organizations"
                       element={<Organizations />}
                     />
+                    <Route
+                      path="dashboard/organizations/add"
+                      element={<NewOrganization />}
+                    />
                     <Route path="dashboard/users" element={<Users />} />
                     <Route path="dashboard/processes" element={<Processes />} />
                     <Route path="dashboard/projects" element={<Projects />} />
@@ -73,6 +80,7 @@ function App() {
               <Route path="signup" element={<Signup />} />
             </Routes>
           )}
+          <ToastContainer />
         </DndProvider>
       </ThemeProvider>
     </div>

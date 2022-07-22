@@ -10,9 +10,13 @@ from bson.objectid import ObjectId
 import os
 from .extensions import db
 from api.projects.models import Projects
+from flask_cors import CORS
+
 
 app = Flask(__name__)  # Flask app instance initiated
-api = Api(app)  # Flask restful wraps Flask app around it.
+CORS(app)
+
+api = Api(app)  # Flask restful wraps Flask app around it.d
 app.config.update(
     {
         "APISPEC_SPEC": APISpec(

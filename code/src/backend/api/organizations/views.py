@@ -25,9 +25,9 @@ class OrganizationController(MethodResource, Resource):
         tags=["Organization"],
     )
     @marshal_with(OrganizationSchema())
-    @use_kwargs({"name": fields.Str(), "description": fields.Str()})
+    @use_kwargs({"name": fields.Str(), "description": fields.Str()}, location="json")
     def post(self, **kwargs):
-        project = Organizations(name=kwargs["name"], description=kwargs["description"])
+        project = Organizations(name=kwargs.get("name"), description=kwargs.get("name"))
         project.save()
         return project
 
