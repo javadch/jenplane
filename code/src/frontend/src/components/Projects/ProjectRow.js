@@ -2,7 +2,7 @@ import { useState } from "react";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { getOpenAPI } from "openapi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ConfirmationDialogRaw from "./ConfirmationDialogRaw";
@@ -43,7 +43,9 @@ function ProjectRow(props) {
   return (
     <TableRow>
       <TableCell>{props.row._id}</TableCell>
-      <TableCell>{props.row.name}</TableCell>
+      <TableCell>
+        <Link to={`/dashboard/project/${props.row._id}`}>{props.row.name}</Link>
+      </TableCell>
       <TableCell>{props.row.description}</TableCell>
       <TableCell align="right">
         <IconButton

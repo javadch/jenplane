@@ -4,7 +4,7 @@ import Tippy from "@tippyjs/react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { CELL_TYPES } from "data/projects";
+import { CELL_TYPES } from "constants/projects";
 import { useDrag } from "react-dnd";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";

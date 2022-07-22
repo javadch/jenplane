@@ -1,4 +1,4 @@
-import { CELL_TYPES } from "data/projects";
+import { CELL_TYPES } from "constants/projects";
 import { useDispatch } from "react-redux";
 import { moveActivity } from "slices/projectSlice";
 import { useDrop } from "react-dnd";

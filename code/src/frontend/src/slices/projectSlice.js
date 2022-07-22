@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CELL_TYPES } from "data/projects";
+import { CELL_TYPES } from "constants/projects";
 import { max } from "lodash";
 
 const initialState = {

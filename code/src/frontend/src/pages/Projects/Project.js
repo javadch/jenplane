@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
-import { CELL_TYPES } from "data/projects";
+import { CELL_TYPES } from "constants/projects";
 //import canvas from "assets/img/canvas1.png";
 import Discipline from "components/Grid/Discipline";
 import Phase from "components/Grid/Phase";

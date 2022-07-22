@@ -3,7 +3,7 @@ import { setProject, setMetaData } from "slices/projectSlice";
 import { useDispatch, useSelector } from "react-redux";
 import * as rdflib from "rdflib";
 import NAME_SPACES from "constants/namespaces";
-import { CELL_TYPES } from "data/projects";
+import { CELL_TYPES } from "constants/projects";
 import { getOpenAPI } from "openapi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";

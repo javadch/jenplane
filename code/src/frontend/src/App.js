@@ -24,7 +24,13 @@ import "react-toastify/dist/ReactToastify.css";
 import NewProcess from "pages/Processes/NewProcess";
 import NewProject from "pages/Projects/NewProject";
 
-const mdTheme = createTheme();
+const mdTheme = createTheme({
+  typography: {
+    button: {
+      textTransform: "none",
+    },
+  },
+});
 
 function App() {
   const [open, setOpen] = useState(true);
