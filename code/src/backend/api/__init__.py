@@ -47,7 +47,6 @@ db.init_app(app)
 docs = FlaskApiSpec(app)
 
 
-@app.route("/", methods=("GET", "POST"))
+@app.route("/", methods=("GET"))
 def index():
-    all_projects = Projects.objects() or []
-    return render_template("index.html", projects=all_projects)
+    return render_template("index.html")
