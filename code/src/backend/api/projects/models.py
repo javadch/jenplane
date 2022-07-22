@@ -1,3 +1,4 @@
+from concurrent.futures import process
 from bson import ObjectId
 from api.extensions import db
 
@@ -11,6 +12,12 @@ class Projects(db.Document):
     )
 
     description = db.StringField()
+
+    organization = db.ReferenceField("Organizations")
+
+    process = db.ReferenceField("Processes")
+
+    rdf_content = db.StringField()
 
     def __unicode__(self):
         return self.name

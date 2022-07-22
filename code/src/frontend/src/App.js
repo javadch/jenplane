@@ -22,6 +22,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NewProcess from "pages/Processes/NewProcess";
+import NewProject from "pages/Projects/NewProject";
 
 const mdTheme = createTheme();
 
@@ -74,6 +75,10 @@ function App() {
                       element={<NewProcess />}
                     />
                     <Route path="dashboard/projects" element={<Projects />} />
+                    <Route
+                      path="dashboard/projects/add"
+                      element={<NewProject />}
+                    />
                     <Route path="dashboard/project/:id" element={<Project />} />
                   </Routes>
                 </Container>

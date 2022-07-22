@@ -1,3 +1,5 @@
+from api.processes.models import Processes
+from api.organizations.models import Organizations
 from flask_restful import Resource, Api
 from marshmallow import Schema, fields
 from apispec.ext.marshmallow import MarshmallowPlugin
@@ -9,8 +11,16 @@ from api.projects.models import Projects
 
 class ProjectSchema(Schema):
     _id = fields.String()
+
     name = fields.String()
+
     description = fields.String()
+
+    organization = fields.Nested("OrganizationSchema")
+
+    process = fields.Nested("ProcessSchema")
+
+    rdf_content = fields.String()
 
 
 class ProjectsController(MethodResource, Resource):
@@ -25,9 +35,26 @@ class ProjectsController(MethodResource, Resource):
         tags=["Projects"],
     )
     @marshal_with(ProjectSchema())
-    @use_kwargs({"name": fields.Str(), "description": fields.Str()})
+    @use_kwargs(
+        {
+            "name": fields.Str(),
+            "description": fields.Str(),
+            "organization": fields.Str(),
+            "process": fields.Str(),
+            "rdf_content": fields.Str(),
+        },
+        location="json",
+    )
     def post(self, **kwargs):
-        project = Projects(name=kwargs["name"], description=kwargs["description"])
+        organization = Organizations.objects.with_id(kwargs["organization"])
+        process = Processes.objects.with_id(kwargs["process"])
+        project = Projects(
+            name=kwargs["name"],
+            description=kwargs["description"],
+            organization=organization,
+            process=process,
+            rdf_content=process.rdf_content,
+        )
         project.save()
         return project
 
@@ -39,6 +66,23 @@ class SingleProjectController(MethodResource, Resource):
     )
     def get(self, project_id, **kwargs):
         project = Projects.objects.get_or_404(_id=project_id)
+        return project
+
+    @doc(
+        description="Update a single project",
+        tags=["Projects"],
+    )
+    @marshal_with(ProjectSchema())
+    @use_kwargs(
+        {
+            "rdf_content": fields.Str(),
+        },
+        location="json",
+    )
+    def put(self, project_id, **kwargs):
+        project = Projects.objects.get_or_404(_id=project_id)
+        project.rdf_content = kwargs["rdf_content"]
+        project.save()
         return project
 
     @doc(
