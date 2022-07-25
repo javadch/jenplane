@@ -28,10 +28,6 @@ function NewProcess() {
         toast.dismiss();
         toast.success("Process created");
         navigate("/dashboard/processes");
-        // Status 2xx but invalid data
-        return Promise.reject({
-          code: "auth/http_error/invalid_server_response",
-        });
       })
       .catch((err) => {
         toast.dismiss();
@@ -41,6 +37,16 @@ function NewProcess() {
   const addSampleRDFContent = () => {
     setRDFContent(RDF);
   };
+  const showFile = async (e) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const text = e.target.result;
+      setRDFContent(text);
+    };
+    reader.readAsText(e.target.files[0]);
+  };
+
   return (
     <Fragment>
       <Title>New Process</Title>
@@ -61,6 +67,21 @@ function NewProcess() {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <Button
+            sx={{
+              ml: 2,
+            }}
+            variant="contained"
+            component="label"
+          >
+            Upload
+            <input
+              hidden
+              accept="text/turtle"
+              type="file"
+              onChange={(e) => showFile(e)}
+            />
+          </Button>
           <TextField
             style={{ marginTop: "20px" }}
             fullWidth

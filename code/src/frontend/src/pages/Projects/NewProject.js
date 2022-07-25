@@ -37,10 +37,6 @@ function NewProject() {
         toast.dismiss();
         toast.success("Project created");
         navigate("/dashboard/projects");
-        // Status 2xx but invalid data
-        return Promise.reject({
-          code: "auth/http_error/invalid_server_response",
-        });
       })
       .catch((err) => {
         toast.dismiss();

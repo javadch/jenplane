@@ -17,7 +17,7 @@
     rdfs:comment "The default process template recommended by DataBri-X for JenPlane-based data management projects." ;
     jpn:version "1.0.0" ;
     jpn:phases :phases ;
-    jpn:discplines :discplines .
+    jpn:disciplines :disciplines .
 
 :phases a rdf:Seq ;
     rdf:li :conception ;
@@ -25,7 +25,7 @@
     rdf:li :publishing ;
     rdf:li :preservation .
 
-:discplines a rdf:Seq ;
+:disciplines a rdf:Seq ;
     rdf:li :analyze ;
     rdf:li :integrate ;
     rdf:li :discover ;
@@ -74,13 +74,14 @@
 :act_get_data_from_web a jpn:Activity ;
     jpn:hasPhase :conception ;
     jpn:hasDiscipline :analyze ;
-    jpn:prefferedColor "red" ;
+    jpn:preferredColor "red" ;
     jpn:duration "18"^^xsd:integer ;
     jpn:effort "8"^^xsd:integer .
 
+
 :act_publish_data_on_repo a jpn:Activity ;
-    jpn:hasPhase :publishing, :preservation ;
-    jpn:hasDiscipline :describe, :preserve ;
-    jpn:prefferedColor "amber" ;
+    jpn:hasPhase :publishing, :preservation , :conception ;
+    jpn:hasDiscipline :describe, :preserve, :analyze ;
+    jpn:preferredColor "#FFBF00" ;
     jpn:duration "12"^^xsd:integer ;
-    jpn:effort "8"^^xsd:integer .    
+    jpn:effort "8"^^xsd:integer . 

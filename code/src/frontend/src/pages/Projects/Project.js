@@ -49,12 +49,24 @@ export default function Project(props) {
                 style={{ flexGrow: 1 }}
               >
                 <Typography mr={1} variant="body1" gutterBottom>
-                  <CorporateFareIcon fontSize={"small"} /> Organization:{" "}
-                  <b>{project.organization?.name ?? "Unknown"}</b>
+                  <CorporateFareIcon
+                    fontSize={"small"}
+                    style={{
+                      verticalAlign: "middle",
+                      display: "inline-flex",
+                    }}
+                  />{" "}
+                  Organization: <b>{project.organization?.name ?? "Unknown"}</b>
                 </Typography>
                 <Typography mr={1} variant="body1" gutterBottom>
-                  <MemoryIcon fontSize={"small"} /> Process:{" "}
-                  <b>{project.process?.name ?? "Unknown"}</b>
+                  <MemoryIcon
+                    fontSize={"small"}
+                    style={{
+                      verticalAlign: "middle",
+                      display: "inline-flex",
+                    }}
+                  />{" "}
+                  Process: <b>{project.process?.name ?? "Unknown"}</b>
                 </Typography>
               </Box>
               <Box
@@ -68,9 +80,12 @@ export default function Project(props) {
                 </Button>
               </Box>
             </Box>
-            <Typography mr={1} variant="body1" gutterBottom>
-              Description: {project.description}
-            </Typography>
+            {project.description && (
+              <Typography mr={1} variant="body1" gutterBottom>
+                Description: {project.description}
+              </Typography>
+            )}
+
             <JenPlane>
               <tbody>
                 {projectData

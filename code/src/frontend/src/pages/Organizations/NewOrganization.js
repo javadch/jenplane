@@ -26,10 +26,6 @@ function NewOrganization() {
         toast.dismiss();
         toast.success("Organization created");
         navigate("/dashboard/organizations");
-        // Status 2xx but invalid data
-        return Promise.reject({
-          code: "auth/http_error/invalid_server_response",
-        });
       })
       .catch((err) => {
         toast.dismiss();
