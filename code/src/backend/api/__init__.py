@@ -47,6 +47,6 @@ db.init_app(app)
 docs = FlaskApiSpec(app)
 
 
-@app.route("/", methods=("GET"))
+@app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
