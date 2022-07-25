@@ -7,6 +7,8 @@ from flask_apispec.extension import FlaskApiSpec
 from flask_apispec.views import MethodResource
 from flask_apispec import marshal_with, doc, use_kwargs
 from api.projects.models import Projects
+from api.organizations.views import OrganizationSchema
+from api.processes.views import ProcessSchema
 
 
 class ProjectSchema(Schema):
@@ -16,9 +18,9 @@ class ProjectSchema(Schema):
 
     description = fields.String()
 
-    organization = fields.Nested("OrganizationSchema")
+    organization = fields.Nested(OrganizationSchema)
 
-    process = fields.Nested("ProcessSchema")
+    process = fields.Nested(ProcessSchema)
 
     rdf_content = fields.String()
 
@@ -37,10 +39,10 @@ class ProjectsController(MethodResource, Resource):
     @marshal_with(ProjectSchema())
     @use_kwargs(
         {
-            "name": fields.Str(),
+            "name": fields.Str(required=True),
             "description": fields.Str(),
-            "organization": fields.Str(),
-            "process": fields.Str(),
+            "organization": fields.Str(required=True),
+            "process": fields.Str(required=True),
             "rdf_content": fields.Str(),
         },
         location="json",
@@ -64,6 +66,7 @@ class SingleProjectController(MethodResource, Resource):
         description="Get a single project",
         tags=["Projects"],
     )
+    @marshal_with(ProjectSchema())
     def get(self, project_id, **kwargs):
         project = Projects.objects.get_or_404(_id=project_id)
         return project

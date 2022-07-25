@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getOpenAPI } from "openapi";
 import OrganizationRow from "components/Organizations/OrganizationRow";
+import Alert from "@mui/material/Alert";
 
 export default function Organizations() {
   let navigate = useNavigate();
@@ -41,22 +42,26 @@ export default function Organizations() {
           New Organization
         </Button>
       </Box>
-
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell align="right">Options</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <OrganizationRow key={row._id} row={row} />
-          ))}
-        </TableBody>
-      </Table>
+      {rows?.length > 0 && (
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell align="right">Options</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <OrganizationRow key={row._id} row={row} />
+            ))}
+          </TableBody>
+        </Table>
+      )}
+      {rows?.length === 0 && (
+        <Alert severity="info">No organizations found</Alert>
+      )}
     </Fragment>
   );
 }

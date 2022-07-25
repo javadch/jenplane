@@ -11,6 +11,7 @@ import os
 from .extensions import db
 from api.projects.models import Projects
 from flask_cors import CORS
+from flask import jsonify
 
 
 app = Flask(__name__)  # Flask app instance initiated
@@ -45,6 +46,17 @@ app.config.update(
 )
 db.init_app(app)
 docs = FlaskApiSpec(app)
+
+# Return validation errors as JSON
+@app.errorhandler(422)
+@app.errorhandler(400)
+def handle_error(err):
+    headers = err.data.get("headers", None)
+    messages = err.data.get("messages", ["Invalid request."])
+    if headers:
+        return jsonify({"errors": messages}), err.code, headers
+    else:
+        return jsonify({"errors": messages}), err.code
 
 
 @app.route("/", methods=["GET"])

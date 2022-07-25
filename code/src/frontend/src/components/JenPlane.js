@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const StyledTable = styled.table`
   border-collapse: collapse;
-
+  margin-top: 2rem;
   tbody tr.bordered {
     border-top: 3px solid #000;
   }

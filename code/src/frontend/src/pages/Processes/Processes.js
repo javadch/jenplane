@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getOpenAPI } from "openapi";
 import ProcessRow from "components/Processes/ProcessRow";
+import Alert from "@mui/material/Alert";
 
 export default function Processes() {
   let navigate = useNavigate();
@@ -41,21 +42,23 @@ export default function Processes() {
           New Process
         </Button>
       </Box>
-
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Options</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <ProcessRow key={row._id} row={row} />
-          ))}
-        </TableBody>
-      </Table>
+      {rows?.length > 0 && (
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell align="right">Options</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <ProcessRow key={row._id} row={row} />
+            ))}
+          </TableBody>
+        </Table>
+      )}
+      {rows?.length === 0 && <Alert severity="info">No process found</Alert>}
     </Fragment>
   );
 }

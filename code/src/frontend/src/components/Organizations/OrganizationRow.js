@@ -29,6 +29,7 @@ function OrganizationRow(props) {
           });
         })
         .then((result) => {
+          toast.dismiss();
           toast.success("Organization deleted");
           navigate("/dashboard/organizations");
         })

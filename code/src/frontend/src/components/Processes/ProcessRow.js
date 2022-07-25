@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ConfirmationDialogRaw from "./ConfirmationDialogRaw";
 import { toast } from "react-toastify";
+import PreviewIcon from "@mui/icons-material/Preview";
 
 function ProcessRow(props) {
   let navigate = useNavigate();
@@ -27,6 +28,7 @@ function ProcessRow(props) {
           });
         })
         .then((result) => {
+          toast.dismiss();
           toast.success("Process deleted");
           navigate("/dashboard/processes");
         })
@@ -49,6 +51,12 @@ function ProcessRow(props) {
           onClick={() => handleClickListItem(props.row)}
         >
           <DeleteIcon />
+        </IconButton>
+        <IconButton
+          color="inherit"
+          onClick={() => navigate(`/dashboard/process/${props.row._id}`)}
+        >
+          <PreviewIcon />
         </IconButton>
         <ConfirmationDialogRaw
           id="delete-process-dialog"

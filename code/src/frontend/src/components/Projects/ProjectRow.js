@@ -28,6 +28,7 @@ function ProjectRow(props) {
           });
         })
         .then((result) => {
+          toast.dismiss();
           toast.success("Project deleted");
           navigate("/dashboard/projects");
         })
@@ -46,7 +47,8 @@ function ProjectRow(props) {
       <TableCell>
         <Link to={`/dashboard/project/${props.row._id}`}>{props.row.name}</Link>
       </TableCell>
-      <TableCell>{props.row.description}</TableCell>
+      <TableCell>{props.row.organization?.name ?? "Unknown"}</TableCell>
+      <TableCell>{props.row.process?.name ?? "Unknown"}</TableCell>
       <TableCell align="right">
         <IconButton
           color="inherit"

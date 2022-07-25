@@ -270,6 +270,7 @@ function useProject({ id }) {
         });
       })
       .then((result) => {
+        toast.dismiss();
         toast.success("Project updated");
         navigate("/dashboard/projects");
       })

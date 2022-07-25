@@ -6,12 +6,14 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { getOpenAPI } from "openapi";
 import { toast } from "react-toastify";
+import { RDF } from "data/rdf";
 
 function NewProcess() {
   let navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [rdf_content, setRDFContent] = useState("");
+
   const saveProcess = () => {
     getOpenAPI()
       .then((client) => {
@@ -23,15 +25,22 @@ function NewProcess() {
         });
       })
       .then((result) => {
+        toast.dismiss();
         toast.success("Process created");
         navigate("/dashboard/processes");
         // Status 2xx but invalid data
         return Promise.reject({
           code: "auth/http_error/invalid_server_response",
         });
+      })
+      .catch((err) => {
+        toast.dismiss();
+        toast.error("Error creating process");
       });
   };
-
+  const addSampleRDFContent = () => {
+    setRDFContent(RDF);
+  };
   return (
     <Fragment>
       <Title>New Process</Title>
@@ -49,6 +58,7 @@ function NewProcess() {
             required
             id="outlined-required"
             label="Name"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <TextField
@@ -58,8 +68,19 @@ function NewProcess() {
             label="RDF Content"
             multiline
             rows={8}
+            value={rdf_content}
             onChange={(e) => setRDFContent(e.target.value)}
           />
+          <Button
+            sx={{
+              ml: 2,
+            }}
+            variant="outlined"
+            color="primary"
+            onClick={() => addSampleRDFContent()}
+          >
+            Sample RDF content
+          </Button>
           <Box
             m={1}
             display="flex"

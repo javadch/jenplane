@@ -23,6 +23,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NewProcess from "pages/Processes/NewProcess";
 import NewProject from "pages/Projects/NewProject";
+import Process from "pages/Processes/Process";
 
 const mdTheme = createTheme({
   typography: {
@@ -80,6 +81,7 @@ function App() {
                       path="dashboard/processes/add"
                       element={<NewProcess />}
                     />
+                    <Route path="dashboard/process/:id" element={<Process />} />
                     <Route path="dashboard/projects" element={<Projects />} />
                     <Route
                       path="dashboard/projects/add"

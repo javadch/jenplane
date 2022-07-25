@@ -9,6 +9,7 @@ import Title from "components/Title";
 import Button from "@mui/material/Button";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getOpenAPI } from "openapi";
+import Alert from "@mui/material/Alert";
 import ProjectRow from "components/Projects/ProjectRow";
 
 export default function Projects() {
@@ -41,22 +42,25 @@ export default function Projects() {
           New Project
         </Button>
       </Box>
-
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell align="right">Options</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <ProjectRow key={row._id} row={row} />
-          ))}
-        </TableBody>
-      </Table>
+      {rows?.length > 0 && (
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Organization</TableCell>
+              <TableCell>Process</TableCell>
+              <TableCell align="right">Options</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <ProjectRow key={row._id} row={row} />
+            ))}
+          </TableBody>
+        </Table>
+      )}
+      {rows?.length === 0 && <Alert severity="info">No projects found</Alert>}
     </Fragment>
   );
 }

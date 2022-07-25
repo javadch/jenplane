@@ -34,12 +34,17 @@ function NewProject() {
         });
       })
       .then((result) => {
+        toast.dismiss();
         toast.success("Project created");
         navigate("/dashboard/projects");
         // Status 2xx but invalid data
         return Promise.reject({
           code: "auth/http_error/invalid_server_response",
         });
+      })
+      .catch((err) => {
+        toast.dismiss();
+        toast.error("Error creating project");
       });
   };
 
@@ -95,7 +100,7 @@ function NewProject() {
             onChange={(e) => setDescription(e.target.value)}
           />
           <FormControl fullWidth style={{ marginTop: "20px" }}>
-            <InputLabel id="demo-simple-select-label">Organization</InputLabel>
+            <InputLabel id="demo-simple-select-label">Organization*</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -111,7 +116,7 @@ function NewProject() {
             </Select>
           </FormControl>
           <FormControl fullWidth style={{ marginTop: "20px" }}>
-            <InputLabel id="simple-select-label">Process</InputLabel>
+            <InputLabel id="simple-select-label">Process*</InputLabel>
             <Select
               labelId="simple-select-label"
               id="simple-select"
