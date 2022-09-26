@@ -1,4 +1,4 @@
-@prefix rdf: 		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+export const RDF = `@prefix rdf: 		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: 	    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: 		<http://www.w3.org/2002/07/owl#> .
 @prefix xsd: 		<http://www.w3.org/2001/XMLSchema#> .
@@ -78,10 +78,16 @@
     jpn:duration "18"^^xsd:integer ;
     jpn:effort "8"^^xsd:integer .
 
-
 :act_publish_data_on_repo a jpn:Activity ;
     jpn:hasPhase :publishing, :preservation , :conception ;
     jpn:hasDiscipline :describe, :preserve, :analyze ;
     jpn:preferredColor "#FFBF00" ;
     jpn:duration "12"^^xsd:integer ;
-    jpn:effort "8"^^xsd:integer . 
+    jpn:effort "8"^^xsd:integer .
+
+:act_publish_data_on_repo1 a jpn:Activity ;
+    jpn:hasPhase :publishing, :preservation ;
+    jpn:hasDiscipline :describe, :preserve ;
+    jpn:preferredColor "#FFBF88" ;
+    jpn:duration "12"^^xsd:integer ;
+    jpn:effort "8"^^xsd:integer .`;
