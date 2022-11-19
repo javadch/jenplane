@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "jenplane_backend"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 fastapi = "^0.87.0"
 uvicorn = {extras = ["standard"], version = "^0.19.0"}
 
