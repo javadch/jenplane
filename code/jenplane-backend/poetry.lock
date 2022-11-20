@@ -228,6 +228,18 @@ tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
+name = "pytest-fastapi-deps"
+version = "0.2.3"
+description = "A fixture which allows easy replacement of fastapi dependencies for testing"
+category = "dev"
+optional = false
+python-versions = ">=3.7,<4.0"
+
+[package.dependencies]
+fastapi = "*"
+pytest = "*"
+
+[[package]]
 name = "python-dotenv"
 version = "0.21.0"
 description = "Read key-value pairs from a .env file and set them as environment variables"
@@ -355,7 +367,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "ef1134e4f0955ed2776dc7675aceb4bde400e77a38bc3178960abead2442fef0"
+content-hash = "c7fe4b5bd90cf82136a1e28e22b488185869da5b34dd77023e882303f613dafa"
 
 [metadata.files]
 anyio = [
@@ -502,6 +514,10 @@ pyparsing = [
 pytest = [
     {file = "pytest-7.2.0-py3-none-any.whl", hash = "sha256:892f933d339f068883b6fd5a459f03d85bfcb355e4981e146d2c7616c21fef71"},
     {file = "pytest-7.2.0.tar.gz", hash = "sha256:c4014eb40e10f11f355ad4e3c2fb2c6c6d1919c73f3b5a433de4708202cade59"},
+]
+pytest-fastapi-deps = [
+    {file = "pytest-fastapi-deps-0.2.3.tar.gz", hash = "sha256:b472c147967218d458fec3c7ac29bcad64d81e0c17e8519bb41628b6fac318fa"},
+    {file = "pytest_fastapi_deps-0.2.3-py3-none-any.whl", hash = "sha256:f1f405317623d13e9b5c220a9e962905500cc9a3ce3736dd55aeb0b7d665e3aa"},
 ]
 python-dotenv = [
     {file = "python-dotenv-0.21.0.tar.gz", hash = "sha256:b77d08274639e3d34145dfa6c7008e66df0f04b7be7a75fd0d5292c191d79045"},
