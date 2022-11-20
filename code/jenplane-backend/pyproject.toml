@@ -2,7 +2,7 @@
 name = "jenplane-backend"
 version = "0.1.0"
 description = ""
-authors = ["Manuel Prinz <manuel@pinguinkiste.de>"]
+authors = ["Manuel Prinz <manuel.prinz@tib.eu>"]
 readme = "README.md"
 packages = [{include = "jenplane_backend"}]
 
