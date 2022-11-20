@@ -62,3 +62,6 @@ typings/
 
 # PyCharm
 .idea/
+
+# Python stuff
+__pycache__
