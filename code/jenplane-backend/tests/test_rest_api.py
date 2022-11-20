@@ -3,7 +3,7 @@ from unittest.mock import Mock
 from fastapi.testclient import TestClient
 
 from jenplane_backend.api.example_usecase import ExampleUseCase
-from jenplane_backend.app import app, example_use_case
+from jenplane_backend.rest_api import app, example_use_case
 
 client = TestClient(app)
 
