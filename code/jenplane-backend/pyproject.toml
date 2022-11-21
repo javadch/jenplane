@@ -10,6 +10,7 @@ packages = [{include = "jenplane_backend"}]
 python = "^3.10"
 fastapi = "^0.87.0"
 uvicorn = {extras = ["standard"], version = "^0.19.0"}
+pymongo = "^4.3.3"
 
 
 [tool.poetry.group.test.dependencies]
