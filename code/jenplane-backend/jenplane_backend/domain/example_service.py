@@ -1,10 +1,10 @@
 from jenplane_backend.api.example_usecase import ExampleUseCase
+from jenplane_backend.spi.example_repository import ExampleRepository
 
 
 class ExampleService(ExampleUseCase):
-    # Empty constructor required by FastAPI
-    def __init__(self):
-        pass
+    def __init__(self, repository: ExampleRepository):
+        self._repo = repository
 
     def hello_world(self):
-        return {"message": "Hello World"}
+        return {"message": self._repo.get_message()}

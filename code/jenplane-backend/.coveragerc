@@ -1,0 +1,8 @@
+[run]
+branch = True
+omit = tests/*
+
+[report]
+include_namespace_packages = False
+precision = 1
+# skip_empty = True
